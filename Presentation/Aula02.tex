@@ -140,19 +140,127 @@ Type -> Int | Bool | String | Void
   Int mistery(Int x){
       y = false;
       if(y){
+         x = "nada";
+      }
+      else{
+        x = x + 1; 
       }
       x;
   }
 \end{lstlisting}
    \begin{itemize}
-      \pause
       \item O tipo da função está correto ?
       \pause
-      \item O Tipo da expressão x = x - 1 está correto ? 
+      \item Quando podemos considerar um programa correto ?  (\textcolor{red}{Para isso precisamos de uma especificação.}) 
       \pause
-      \item Existe algum tipo para a variável s ? 
+      \item O que é correto ?  (\textcolor{red}{Tudo aquido que atende a uma dada especificação pode ser dito correto em relação à especificação}) 
+      \pause
+      \item É sempre possível descobrir se um programa está correto ? (\textcolor{red}{Infelizmente não ! mas na dúvida diga que não ;-) } ) 
    \end{itemize}
 
 \end{frame}
+
+
+\begin{frame}[fragile]
+   \frametitle{E quanto a este outro !}
+\begin{lstlisting}[style=ast,escapechar=@]
+  Bool mistery2(){
+      z = z and !z;
+      z;
+  }
+\end{lstlisting}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+   \frametitle{As regras do jogo !}
+  \begin{itemize}
+   \item Para julgar se um programa, ou uma parte dele, está correto precisamos de um modelo de como um programa devia se comportar
+   \item Em geral nos interessa que o programa não faça nada que possa colocar a máquina que o executa em um estado de erro !
+   \item Além disso, só porque podemos , também proibimos certas operações as quais julgamos serem "maus habitos" na linguagem.
+   \item Finalmente especificamos um conjunto de regras que dizem como um "bom programinha" deveria ser comportar
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{Sistemas de tipo- Formato das regras}
+   
+  \begin{tabular}{l}
+    \AxiomC{Premissas }
+    \RightLabel{\rname{Nome da regra} }
+    \UnaryInfC{$ conclusao $} 
+    \DisplayProof 
+  \end{tabular}
+ \begin{itemize}
+   \item Há um ambiente de tipos $\Gamma$, um mapeamento de nomes para tipos que registra tipo de cada identificador (nomes de variáeis, de funções, de classes e etc) no programa.
+   \item Dizemos que de $\Gamma$ podemos deduzir o um tipo de alguma coisa do seguinte modo: $\Gamma \vdash t:\tau$, onde $tau$ é um tipo qualquer e $t$ é um fragmento (termo) do programa.
+ \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+   \frametitle{Algumas regras para Lang !}
+   
+  \begin{tabular}{l}
+    
+    \AxiomC{ $(x,\tau) \in \Gamma$}
+    \RightLabel{\rname{var} }
+    \UnaryInfC{$ \Gamma \vdash var : \tau$} 
+    \DisplayProof \\[1cm]
+    
+    \AxiomC{}
+    \RightLabel{\rname{int} }
+    \UnaryInfC{$ \Gamma \vdash INT : Int$} 
+    \DisplayProof \\[1cm]
+    
+    \AxiomC{}
+    \RightLabel{\rname{bool} }
+    \UnaryInfC{$ \Gamma \vdash BOOL : Bool$} 
+    \DisplayProof \\[1cm]
+    
+    \AxiomC{}
+    \RightLabel{\rname{str} }
+    \UnaryInfC{$ \Gamma \vdash STRING : String$} 
+    \DisplayProof \\
+  \end{tabular}
+
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{Algumas regras para Expressões !}
+   
+  \begin{tabular}{l}
+    
+    \AxiomC{ $\Gamma \vdash x_1 : Int $}
+    \AxiomC{ $\Gamma \vdash x_2 : Int $}
+    \RightLabel{\rname{var} }
+    \BinaryInfC{$ \Gamma \vdash x_1 + x_2 : Int$} 
+    \DisplayProof \\[1cm]
+    
+    \AxiomC{ $\Gamma \vdash x_1 : Int $}
+    \AxiomC{ $\Gamma \vdash x_2 : Int $}
+    \RightLabel{\rname{var} }
+    \BinaryInfC{$ \Gamma \vdash x_1 - x_2 : Int$} 
+    \DisplayProof \\[1cm]
+    
+   \AxiomC{ $\Gamma \vdash x_1 : Bool $}
+    \AxiomC{ $\Gamma \vdash x_2 : Bool $}
+    \RightLabel{\rname{var} }
+    \BinaryInfC{$ \Gamma \vdash x_1 \&\& x_2 : Bool$} 
+    \DisplayProof \\[1cm]
+     
+    \AxiomC{ $\Gamma \vdash x_1 : Int $}
+    \AxiomC{ $\Gamma \vdash x_2 : Int $}
+    \RightLabel{\rname{var} }
+    \BinaryInfC{$ \Gamma \vdash x_1 == x_2 : Bool$} 
+    \DisplayProof \\[1cm]
+   
+  \end{tabular}
+
+\end{frame}
+
 
 \end{document}

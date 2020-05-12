@@ -1,17 +1,30 @@
-\frametitle{Considere agora esse programa !}
-\begin{lstlisting}[style=ast,escapechar=@]
-  Int mistery(){
-      s = x;
-      y = z ;
-      x = y;
-  }
-\end{lstlisting}
-   \begin{itemize}
-      \pause
-      \item O tipo da função está correto ?
-      \pause
-      \item O Tipo da expressão x = x - 1 está correto ?
-      \pause
-      \item Existe algum tipo para a variável s ?
-   \end{itemize}
+\frametitle{Algumas regras para Expressões !}
+
+  \begin{tabular}{l}
+
+    \AxiomC{ $\Gamma \vdash x_1 : Int $}
+    \AxiomC{ $\Gamma \vdash x_2 : Int $}
+    \RightLabel{\rname{var} }
+    \BinaryInfC{$ \Gamma \vdash x_1 + x_2 : Int$}
+    \DisplayProof \\[1cm]
+
+    \AxiomC{ $\Gamma \vdash x_1 : Int $}
+    \AxiomC{ $\Gamma \vdash x_2 : Int $}
+    \RightLabel{\rname{var} }
+    \BinaryInfC{$ \Gamma \vdash x_1 - x_2 : Int$}
+    \DisplayProof \\[1cm]
+
+   \AxiomC{ $\Gamma \vdash x_1 : Bool $}
+    \AxiomC{ $\Gamma \vdash x_2 : Bool $}
+    \RightLabel{\rname{var} }
+    \BinaryInfC{$ \Gamma \vdash x_1 \&\& x_2 : Bool$}
+    \DisplayProof \\[1cm]
+
+    \AxiomC{ $\Gamma \vdash x_1 : Int $}
+    \AxiomC{ $\Gamma \vdash x_2 : Int $}
+    \RightLabel{\rname{var} }
+    \BinaryInfC{$ \Gamma \vdash x_1 == x_2 : Bool$}
+    \DisplayProof \\[1cm]
+
+  \end{tabular}
 
