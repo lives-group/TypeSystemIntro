@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.4.8)  12 MAY 2020 16:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2020.4.8)  12 MAY 2020 16:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1029,6 +1029,11 @@ LaTeX Font Warning: Font shape `OT1/cmss/bx/it' undefined
 ) [20
 
 ]
+\openout4 = `Aula02.vrb'.
+
+ (./Aula02.vrb) [21
+
+]
 \tf@nav=\write6
 \openout6 = `Aula02.nav'.
 
@@ -1038,11 +1043,12 @@ LaTeX Font Warning: Font shape `OT1/cmss/bx/it' undefined
 \tf@snm=\write8
 \openout8 = `Aula02.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 266.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 266.
- (./Aula02.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 266.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 266.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 282.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 282.
+
+(./Aula02.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 282.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 282.
 Package rerunfilecheck Info: File `Aula02.out' has not changed.
 (rerunfilecheck)             Checksum: 77E0CD81398B4F531FFF409F0794C1C8;65.
 
@@ -1051,10 +1057,10 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 20466 strings out of 492167
- 367767 string characters out of 6131559
+ 20474 strings out of 492167
+ 367840 string characters out of 6131559
  472176 words of memory out of 5000000
- 24302 multiletter control sequences out of 15000+600000
+ 24306 multiletter control sequences out of 15000+600000
  14577 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  58i,15n,59p,773b,1359s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1068,10 +1074,10 @@ st/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmssi10.pfb></usr/share/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9
 .pfb>
-Output written on Aula02.pdf (20 pages, 147086 bytes).
+Output written on Aula02.pdf (21 pages, 149196 bytes).
 PDF statistics:
- 608 PDF objects out of 1000 (max. 8388607)
- 561 compressed objects within 6 object streams
- 42 named destinations out of 1000 (max. 500000)
+ 635 PDF objects out of 1000 (max. 8388607)
+ 587 compressed objects within 6 object streams
+ 44 named destinations out of 1000 (max. 500000)
  57 words of extra memory for PDF output out of 10000 (max. 10000000)
 

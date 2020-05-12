@@ -263,4 +263,20 @@ Type -> Int | Bool | String | Void
 \end{frame}
 
 
+\begin{frame}[fragile]
+   \frametitle{Algumas regras comandos!}
+   
+  \begin{tabular}{l}
+    
+    \AxiomC{ $\Gamma \vdash E : Bool $}
+    \AxiomC{ $\Gamma \vdash C: \tau$}
+    \RightLabel{\rname{var} }
+    \BinaryInfC{$ \Gamma \vdash (While\;\; E\;\; C ): \tau$} 
+    \DisplayProof \\[1cm]
+
+   
+  \end{tabular}
+
+\end{frame}
+
 \end{document}
