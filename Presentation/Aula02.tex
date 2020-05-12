@@ -1,0 +1,158 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+\usepackage[utf8x]{inputenc}
+\usepackage{default}
+\usepackage{amsmath}
+\usepackage{listings}
+
+\usepackage{bussproofs}
+
+\usepackage[nounderscore]{syntax}
+\setlength{\grammarparsep}{2pt}
+\setlength{\grammarindent}{2em}
+
+\newcommand{\doubleplus}{+\kern-1.3ex+\kern0.8ex}
+\newcommand{\type}[1]{\emph{#1}}        % Type names in the text.
+\newcommand{\rname}[1]{\textbf{\scriptsize \emph{#1}}} % Rule names in the type system.
+\newcommand{\trname}[1]{\emph{\Small\textbf{#1}}} % Rule names in the text
+
+
+
+\usepackage{listings}
+
+\lstdefinestyle{uSugar}{
+  emph={define, lambda, syntax, loop, if, true, false},
+  emphstyle=\bf,
+  basicstyle=\footnotesize, showspaces=false,
+  firstnumber=auto, numbers=left, numbersep=1pt
+}
+
+\lstdefinestyle{ast}{
+  basicstyle=\footnotesize, showspaces=false,
+  literate={->}{::=}{2}
+}
+
+
+
+
+
+\begin{document}
+
+\frame{
+
+\title{Diversão com sistemas de tipos}
+\author{Elton M Cardoso}
+\date{11/05/2020}
+
+}
+
+\section{Lang, uma linguagem imperativa}
+
+\frame{ 
+   \huge
+   \begin{center}
+      Lang !
+   \end{center}
+   \normalsize
+}
+
+\begin{frame}
+   \frametitle{Recursos:}
+   \begin{itemize}
+    \item operadores aritméticos: + e -
+    \item operadores Lógicos: \&\& (e lógico) e ! (negação)
+    \item Comparações: $<$ e == .
+    \item Comandos: if-then-else, while e atribuições.
+    \item Funções podem ser definidas e chamadas a qualquer momento !
+    \item Um programa será uma coleção de funções e a função principal deverá ser chamada de main  e não deve ter quaisquer argumentos !
+    \item Não há comando explícito de retorno ! Toda função deve terminar com uma expressão e tal expressão é o resultado da função;
+    \item Só pode-se operar entre valores de mesmo tipo !
+    \item Int: (+,-,$<$,==); String (==, $<$), Bool (\&\&, ! , ==)
+   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{Sintaxe Abstrata}
+  \begin{lstlisting}[style=ast,escapechar=@]
+Prgram -> Func*
+Func   -> Type ID Params Cmd  
+Params -> Type ID (,Type ID)* | @$\lambda$@
+Cmd -> Cmd ; Cmd
+    | IF Expr Cmd Cmd
+    | WHILE Expr Cmd
+    | VAR = Expr
+    | Expr
+Expr -> Expr + Expr
+      | Expr - Expr
+      | Expr && Expr
+      | Expr < Expr
+      | Expr == Expr
+      | ! Expr
+      | ID | INT | true | false | STRING
+Type -> Int | Bool | String | Void
+    
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{Exemplo de um programa em Lang - Sintaxe Concreta}
+\begin{lstlisting}[style=ast,escapechar=@]
+  Int sum(Int x){
+      s = 1;
+      while(0 < x){
+        s = s + x;
+        x = x - 1;
+      }
+      s;
+  }
+\end{lstlisting}
+   \begin{itemize}
+      \pause
+      \item O tipo da função está correto ?
+      \pause
+      \item O Tipo da expressão x = x - 1 está correto ? 
+      \pause
+      \item Existe algum tipo para a variável s ? 
+   \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{So many (dificult) questions !}
+
+   \begin{itemize}
+      \item O tipo da função está correto ? (\textcolor{red}{$Type Checking$})
+      \item Para responder a essa pergunta usamos, assumimos que x tem tipo Int e verificamos que o retorno da função será de fato do tipo Int.
+      \pause
+      \item O Tipo da expressão x = x - 1 está correto ? (\textcolor{red}{$Type Checking$}) 
+      \item Assumindo que x tem tipo Int, verificamos se o resultado do lado direito é compatível com a variável do lado esquerdo.
+      \pause
+      \item Existe algum tipo para a variável s ? (\textcolor{red}{$Type Inference$})
+      \item O único tipo para s que faz com que o programa fique correto é Int.
+   \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{Considere agora esse programa !}
+\begin{lstlisting}[style=ast,escapechar=@]
+  Int mistery(Int x){
+      y = false;
+      if(y){
+      }
+      x;
+  }
+\end{lstlisting}
+   \begin{itemize}
+      \pause
+      \item O tipo da função está correto ?
+      \pause
+      \item O Tipo da expressão x = x - 1 está correto ? 
+      \pause
+      \item Existe algum tipo para a variável s ? 
+   \end{itemize}
+
+\end{frame}
+
+\end{document}

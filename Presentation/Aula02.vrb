@@ -1,0 +1,17 @@
+\frametitle{Considere agora esse programa !}
+\begin{lstlisting}[style=ast,escapechar=@]
+  Int mistery(){
+      s = x;
+      y = z ;
+      x = y;
+  }
+\end{lstlisting}
+   \begin{itemize}
+      \pause
+      \item O tipo da função está correto ?
+      \pause
+      \item O Tipo da expressão x = x - 1 está correto ?
+      \pause
+      \item Existe algum tipo para a variável s ?
+   \end{itemize}
+
