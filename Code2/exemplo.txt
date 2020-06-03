@@ -1,0 +1,36 @@
+f(Int n, Int m) : s{
+    s = 0;
+    while(0 < n){
+       s = s + m;
+       n = n -1;
+    }
+}
+
+divMod(Int n, Int q) : m, r{
+    k = 0;
+    while( !(!(q < n) & !(q == n) )){
+       n = n - q;
+       k = k + 1;
+    }
+    m = k;
+    r = n;
+}
+
+fat(Int n) :{
+   if(0 < n){
+       f(n, fat(n-1));
+   }else{
+       1;
+   }
+}
+
+l() :{
+   x = 1;
+}
+
+main() : {
+    m = divMod(12,2)<:r:>; 
+    fat(4);
+    fat(6);
+    l()<:y,z,w:>;
+}

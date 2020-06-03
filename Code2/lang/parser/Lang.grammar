@@ -1,0 +1,98 @@
+%package "lang.parser";
+
+%import "lang.ast.*";
+%import "lang.ast.expr.*";
+%import "lang.ast.cmd.*";
+%import "lang.ast.types.*";
+%import "java.util.ArrayList";
+
+%class "LangParser";
+
+%terminals RPAREN, LPAREN, LBRACE, RBRACE, SEMI, COMMA, COLON,
+           NUMBER, INT, BOOL, STR, VOID, STRING,  TRUE, FALSE, ID, PLUS, MINUS, 
+           AND, NOT, EQ, LT, ATTR, IF,ELSE, WHILE,RTL,RTR ;
+
+
+%left RPAREN;
+%right NOT;
+%left PLUS, MINUS;
+%left EQ, LT;
+%left  AND; 
+
+%typeof NUMBER = "Integer";
+%typeof ID = "String";
+%typeof expr = "Expr";
+%typeof stmt = "Cmd";
+%typeof cmd = "Cmd";
+%typeof block = "Cmd";
+%typeof commandList = "Cmd";
+%typeof program = "Program";
+%typeof type = "SType";
+%typeof varDec = "Pair";
+%typeof functionDec = "Func";
+%typeof STRING =  "String";
+
+%goal program;
+
+program = functionDec.decs*       {: return new Program(decs);  :}
+        ;
+
+functionDec = ID.n LPAREN RPAREN COLON  argList.l ? block.b                 {:return new Func(l, n, new Pair[0], b); :}
+            | ID.n LPAREN varDecList.p RPAREN COLON  argList.l ? block.b    {:return new Func(l, n, p, b); :}
+            ;
+  
+
+block = LBRACE commandList.c RBRACE  {: return c;  :}
+      ;
+      
+varDecList = varDecList COMMA varDec
+           | varDec                         
+           ;
+ 
+varDec = type.t ID.i                {:  return new Pair(t,i);   :}
+       ;
+
+commandList = cmd.c commandList.l    {: return new Seq(c,l); :}           
+            | cmd.c                  {: return c;            :}
+            ; 
+
+cmd = ID.v ATTR expr.e SEMI {: return new Attr(v,e);   :} 
+    | stmt.s                {: return s;  :}
+    | expr.e SEMI           {: return new ExpCmd(e); :}
+    ;
+
+
+stmt = WHILE LPAREN expr.e RPAREN block.c           {: return new While(e,c); :}        
+     | IF LPAREN expr.e RPAREN block.c ELSE block.d {: return new If(e,c,d);  :}
+     ;
+
+expr = expr.a PLUS  expr.b             {: return new Add(a ,b);      :}
+     | expr.a MINUS expr.b             {: return new Sub(a ,b);      :}
+     | expr.a EQ expr.b                {: return new Eq(a ,b);       :}     
+     | NOT expr.e                      {: return new Not(e);         :}
+     | expr.a LT expr.b                {: return new Lt(a ,b);       :}
+     | expr.a AND expr.b               {: return new And(a ,b);      :}
+     | NUMBER.n                        {: return new IntLit(n);      :}
+     | TRUE                            {: return new BoolLit(true);  :}
+     | FALSE                           {: return new BoolLit(false); :}
+     | STRING.s                        {: return new StrLit(s);            :}
+     | ID.v LPAREN argList.c? RPAREN  RTL retList.l RTR   {: return new Call(v, c, l);           :}
+     | ID.v LPAREN argList.c? RPAREN   {: return new Call(v, c, new String[0]); :}
+     | ID.v                                      {: return new Var(v);          :}
+     | LPAREN expr.e RPAREN                      {: return e;                   :}  
+     ;
+
+
+argList = expr
+        | argList COMMA expr
+        ;
+        
+retList = ID.v
+        | retList COMMA ID.v
+        ;        
+        
+type = BOOL           {: return new TyBool();    :}
+     | INT            {: return new TyInt();     :}
+     | STR            {: return new TyString();  :}
+     | VOID           {: return new TyVoid();    :} 
+     ;

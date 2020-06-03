@@ -1,0 +1,2 @@
+Main-Class: LangCompiler
+Class-Path: beaver-rt-0.9.11.jar
